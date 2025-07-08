@@ -35,6 +35,8 @@ export const vehicleStore=create(
   persist(
     (set)=>({
       vehicles:{},
+      currentVehicle:{},
+      setCurrentVehicle:(vehicle) => set({ currentVehicle: vehicle }),
       setVehicles: (vehiclesObj) => set(() => ({ vehicles: vehiclesObj })),
       getPendingVehicles: () => {
         const vehicles = get().vehicles;

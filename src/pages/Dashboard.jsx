@@ -11,8 +11,9 @@ import { useNavigate } from 'react-router-dom'
 
 const Dashboard = () => {
   const user=useAuthStore((state)=>state.isLogin)
+  const currentVehicle=vehicleStore(state=>state.setCurrentVehicle)
   console.log(user)
-   console.log()
+
     const totalVehicles=vehicleStore((state)=>state.vehicles)
     const pendingVehicles=vehicleStore((state)=>state.getPendingVehicles)
     const completedvehicles=vehicleStore((state)=>state.getCompletedVehicles)

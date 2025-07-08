@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import pattern from '../assets/Pattern 01.png';
-import { useAuthStore } from '../store/store';
+import { useAuthStore, vehicleStore } from '../store/store';
 import { useNavigate } from 'react-router-dom';
 
 const LoginPage = () => {

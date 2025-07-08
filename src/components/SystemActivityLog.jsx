@@ -1,30 +1,33 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { vehicleStore } from '../store/store';
+import { pendingApprovals } from '../assets/DummyData';
 
 const SystemActivityLog = () => {
-  const vehiclesArray = [
-    { _id: 'V001', type: 'Car', registration: 'KA-01-AB-1234', status: 'success' },
-    { _id: 'V002', type: 'Truck', registration: 'KA-02-CD-5678', status: 'failed' },
-    { _id: 'V003', type: 'Bus', registration: 'KA-03-EF-9012', status: 'pending' },
-    { _id: 'V004', type: 'Car', registration: 'KA-04-GH-3456', status: 'success' },
-    { _id: 'V005', type: 'Truck', registration: 'KA-05-IJ-7890', status: 'pending' },
-    { _id: 'V006', type: 'Bus', registration: 'KA-06-KL-1234', status: 'success' },
-    { _id: 'V007', type: 'Car', registration: 'KA-07-MN-5678', status: 'failed' },
-    { _id: 'V008', type: 'Truck', registration: 'KA-08-OP-9012', status: 'pending' },
-    { _id: 'V009', type: 'Bus', registration: 'KA-09-QR-3456', status: 'success' },
-    { _id: 'V010', type: 'Car', registration: 'KA-10-ST-7890', status: 'pending' },
-  ];
+  const navigate = useNavigate();
 
+  // Zustand store
+  const vehicles = vehicleStore((state) => state.vehicles);
+  const setVehicles = vehicleStore((state) => state.setVehicles);
+  const setCurrentVehicle = vehicleStore((state) => state.setCurrentVehicle);
+
+  // On mount, load pendingApprovals
+  useEffect(() => {
+    setVehicles(pendingApprovals);
+  }, [setVehicles]);
+
+  // Pagination
   const [currentPage, setCurrentPage] = useState(1);
   const [viewAll, setViewAll] = useState(false);
   const vehiclesPerPage = 5;
 
-  const totalPages = Math.ceil(vehiclesArray.length / vehiclesPerPage);
+  const totalPages = Math.ceil((vehicles?.length || 0) / vehiclesPerPage);
 
   const indexOfLastVehicle = currentPage * vehiclesPerPage;
   const indexOfFirstVehicle = indexOfLastVehicle - vehiclesPerPage;
   const currentVehicles = viewAll
-    ? vehiclesArray
-    : vehiclesArray.slice(indexOfFirstVehicle, indexOfLastVehicle);
+    ? vehicles
+    : vehicles.slice(indexOfFirstVehicle, indexOfLastVehicle);
 
   const nextPage = () => {
     if (!viewAll) {
@@ -44,7 +47,7 @@ const SystemActivityLog = () => {
   };
 
   const getStatusBadge = (status) => {
-    switch (status) {
+    switch (status?.toLowerCase()) {
       case 'success':
         return (
           <span className="px-2 py-1 rounded-full text-xs text-green-700 bg-green-100">
@@ -52,6 +55,7 @@ const SystemActivityLog = () => {
           </span>
         );
       case 'pending':
+      case 'pending approval':
         return (
           <span className="px-2 py-1 rounded-full text-xs text-yellow-700 bg-yellow-100">
             Pending
@@ -72,38 +76,14 @@ const SystemActivityLog = () => {
     }
   };
 
-  const handleViewReport = (vehicleId) => {
-    console.log(`View Report for vehicle ${vehicleId}`);
-  };
+  const handleContinue = (vehicleIdLast4) => {
+    const vehicle = vehicles.find(
+      (v) => v.VechicleId?.slice(-4) === vehicleIdLast4
+    );
 
-  const handleContinue = (vehicleId) => {
-    console.log(`Continue for vehicle ${vehicleId}`);
-  };
-
-  const renderActionButton = (status, id) => {
-    switch (status) {
-      case 'success':
-      case 'failed':
-        return (
-          <button
-            onClick={() => handleViewReport(id)}
-            className="text-sm text-blue-600 hover:underline"
-          >
-            View Report
-          </button>
-        );
-      case 'pending':
-        return (
-          <button
-            onClick={() => handleContinue(id)}
-            className="text-sm text-blue-600 hover:underline"
-          >
-            Continue
-          </button>
-        );
-      default:
-        return null;
-    }
+    setCurrentVehicle(vehicle);
+    navigate('/tests');
+    console.log('Current Vehicle:', vehicle);
   };
 
   return (
@@ -123,7 +103,7 @@ const SystemActivityLog = () => {
           <thead className="bg-gray-50">
             <tr>
               <th className="px-6 py-3 text-xs font-semibold text-gray-600 uppercase tracking-wider">
-                VEHICLE ID
+                VEHICLE ID (Last 4)
               </th>
               <th className="px-6 py-3 text-xs font-semibold text-gray-600 uppercase tracking-wider">
                 TYPE
@@ -141,21 +121,28 @@ const SystemActivityLog = () => {
           </thead>
           <tbody className="bg-white divide-y divide-gray-200">
             {currentVehicles.map((vehicle) => (
-              <tr key={vehicle._id} className="hover:bg-gray-50">
+              <tr key={vehicle.BookingId} className="hover:bg-gray-50">
                 <td className="px-6 py-4 whitespace-nowrap font-mono text-sm text-gray-900">
-                  {vehicle._id}
+                  {vehicle.VechicleId?.slice(-4)}
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-700">
-                  {vehicle.type}
+                  {vehicle.VechicleType || '-'}
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-700">
-                  {vehicle.registration}
+                  {vehicle.RegistrationNumber || '-'}
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap">
                   {getStatusBadge(vehicle.status)}
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap">
-                  {renderActionButton(vehicle.status, vehicle._id)}
+                  <button
+                    onClick={() =>
+                      handleContinue(vehicle.VechicleId?.slice(-4))
+                    }
+                    className="text-sm text-blue-600 hover:underline"
+                  >
+                    Continue
+                  </button>
                 </td>
               </tr>
             ))}
@@ -186,12 +173,12 @@ const SystemActivityLog = () => {
         <span className="text-xs text-gray-500">
           Showing{' '}
           {viewAll
-            ? `1-${vehiclesArray.length}`
+            ? `1-${vehicles.length}`
             : `${indexOfFirstVehicle + 1}-${Math.min(
                 indexOfLastVehicle,
-                vehiclesArray.length
-              )}`}
-          {' '}of {vehiclesArray.length} vehicles
+                vehicles.length
+              )}`}{' '}
+          of {vehicles.length} vehicles
         </span>
       </div>
     </div>

@@ -1,5 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react'
 import { Car, Camera, Plus, AlertTriangle, CheckCircle, Clock, Eye, Settings, Gauge, Shield, Wrench, Zap, X, Upload, ArrowLeft, Play, RotateCcw, Send, Pause } from 'lucide-react'
+import { vehicleStore } from '../store/store'
 
 const Tests = () => {
   const [currentView, setCurrentView] = useState('inspection') // 'inspection', 'functional-tests', 'test-execution', 'test-results'
@@ -11,7 +12,8 @@ const Tests = () => {
   const [isTestRunning, setIsTestRunning] = useState(false)
   const [progressValue, setProgressValue] = useState(0)
   const [showProgressAfterDelay, setShowProgressAfterDelay] = useState(false)
-
+  const vehicle=vehicleStore((state)=>state.currentVehicle)
+  console.log(vehicle);
   const [inspectionData, setInspectionData] = useState({
     plateNumber: '',
     vehicleModel: '',
@@ -898,33 +900,36 @@ const Tests = () => {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-2">Plate Number</label>
-            <input
+            {/* <input
               type="text"
               value={inspectionData.plateNumber}
               onChange={(e) => handleInputChange('plateNumber', e.target.value)}
               placeholder="Enter plate number"
               className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-            />
+            /> */}
+            <div className='w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500'>{vehicle.RegistrationNumber}</div>
           </div>
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-2">Vehicle Model</label>
-            <input
+            {/* <input
               type="text"
               value={inspectionData.vehicleModel}
               onChange={(e) => handleInputChange('vehicleModel', e.target.value)}
               placeholder="Enter vehicle model"
               className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-            />
+            /> */}
+             <div className='w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500'>{vehicle.VechicleType}</div>
           </div>
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-2">Year</label>
-            <input
+            {/* <input
               type="text"
               value={inspectionData.year}
               onChange={(e) => handleInputChange('year', e.target.value)}
               placeholder="Enter year"
               className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-            />
+            /> */}
+                   <div className='w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500'>{vehicle.VechicleType}</div>
           </div>
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-2">Technician Name</label>

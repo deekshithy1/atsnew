@@ -172,7 +172,7 @@ const Approvals = () => {
             <div className="w-full md:w-2/3 bg-gray-100 p-6 rounded-xl">
               <h4 className="text-lg font-semibold mb-4">Test Summary</h4>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                {Object.entries(selectedVehicle.Tests).map(([code, test]) => (
+                { selectedVehicle?.Tests&&Object.entries(selectedVehicle.Tests).map(([code, test]) => (
                   <div key={code} className="flex justify-between  px-4">
                     <span>{test.item}</span>
                     <span className={test.status === "Passed" ? "text-green-600 font-semibold" : test.status === "Conditional" ? "text-yellow-600 font-semibold" : "text-red-600 font-semibold"}>
