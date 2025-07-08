@@ -1,4 +1,4 @@
-const peddingApprovals = [
+const pendingApprovals = [
   {
     BookingId: 5003,
     status: "Pending Approval",
@@ -7,6 +7,31 @@ const peddingApprovals = [
     RegistrationNumber: "KA-01-AB-1234",
     TechnicianName: "John Doe",
     TestDate: "2025-01-15",
+    Owner: "John Doe",
+   Tests: {
+    rule189_1a: { item: "Service Brake Performance", type: "Automated", status: "Passed" },
+    rule189_1b: { item: "Parking Brake Performance", type: "Automated", status: "Passed" },
+    rule189_2: { item: "Headlight Beam Alignment", type: "Automated", status: "Passed" },
+    rule189_3a: { item: "Side Slip Test - Left", type: "Automated", status: "Passed" },
+    rule189_3b: { item: "Side Slip Test - Right", type: "Automated", status: "Passed" },
+    rule189_3c: { item: "Suspension Test - Front Left", type: "Automated", status: "Passed" },
+    rule189_3d: { item: "Suspension Test - Front Right", type: "Automated", status: "Passed" },
+    rule189_3e: { item: "Suspension Test - Rear Left", type: "Automated", status: "Passed" },
+    rule189_3f: { item: "Suspension Test - Rear Right", type: "Automated", status: "Passed" },
+    rule189_3g: { item: "Wheel Alignment Check", type: "Automated", status: "Passed" },
+    rule189_3h: { item: "Wheel Balance Check", type: "Automated", status: "Passed" },
+    rule189_3i: { item: "Tyre Condition Check", type: "Visual", status: "Passed" },
+    rule189_4: { item: "Speedometer Calibration", type: "Automated", status: "Passed" },
+    rule189_5: { item: "Sound Level Test", type: "Automated", status: "Passed" },
+    rule189_6: { item: "Emission Test - Opacity / Gas Analyzer", type: "Automated", status: "Passed" },
+    rule189_7: { item: "Exhaust Leak Test", type: "Automated", status: "Passed" },
+    rule189_7_Visual: { item: "Exhaust System Check", type: "Visual", status: "Passed" },
+    rule189_8a: { item: "Underbody Inspection - Structural Integrity", type: "Visual", status: "Passed" },
+    rule189_8b: { item: "Underbody Inspection - Rust / Damage", type: "Visual", status: "Passed" },
+    // ... all remaining entries with status: "Passed"
+    // Example:
+    imgChassis: { item: "Photo: Chassis", type: "Visual Proof", status: "Passed" }
+  },
   },
   {
     BookingId: 5004,
@@ -16,6 +41,8 @@ const peddingApprovals = [
     RegistrationNumber: "KA-01-CD-5678",
     TechnicianName: "Jane Smith",
     TestDate: "2025-01-16",
+    Owner: "Vamsi",
+    
   },
   {
     BookingId: 5005,
@@ -25,6 +52,31 @@ const peddingApprovals = [
     RegistrationNumber: "KA-01-EF-9101",
     TechnicianName: "Alice Johnson",
     TestDate: "2025-01-17",
+    Owner: "Kevin",
+    Tests: {
+      rule189_1a: { item: "Service Brake Performance", type: "Automated", status: "Passed" },
+      rule189_1b: { item: "Parking Brake Performance", type: "Automated", status: "Passed" },
+      rule189_2: { item: "Headlight Beam Alignment", type: "Automated", status: "Passed" },
+      rule189_3a: { item: "Side Slip Test - Left", type: "Automated", status: "Passed" },
+      rule189_3b: { item: "Side Slip Test - Right", type: "Automated", status: "Failed" },
+      rule189_3c: { item: "Suspension Test - Front Left", type: "Automated", status: "Passed" },
+      rule189_3d: { item: "Suspension Test - Front Right", type: "Automated", status: "Passed" },
+      rule189_3e: { item: "Suspension Test - Rear Left", type: "Automated", status: "Passed" },
+      rule189_3f: { item: "Suspension Test - Rear Right", type: "Automated", status: "Passed" },
+      rule189_3g: { item: "Wheel Alignment Check", type: "Automated", status: "Passed" },
+      rule189_3h: { item: "Wheel Balance Check", type: "Automated", status: "Passed" },
+      rule189_3i: { item: "Tyre Condition Check", type: "Visual", status: "Passed" },
+      rule189_4: { item: "Speedometer Calibration", type: "Automated", status: "Passed" },
+      rule189_5: { item: "Sound Level Test", type: "Automated", status: "Passed" },
+      rule189_6: { item: "Emission Test - Opacity / Gas Analyzer", type: "Automated", status: "Passed" },
+      rule189_7: { item: "Exhaust Leak Test", type: "Automated", status: "Passed" },
+      rule189_7_Visual: { item: "Exhaust System Check", type: "Visual", status: "Passed" },
+      rule189_8a: { item: "Underbody Inspection - Structural Integrity", type: "Visual", status: "Passed" },
+      rule189_8b: { item: "Underbody Inspection - Rust / Damage", type: "Visual", status: "Passed" },
+      // ... all remaining entries with status: "Passed"
+      // Example:
+      imgChassis: { item: "Photo: Chassis", type: "Visual Proof", status: "Passed" }
+    },
   },
   {
     BookingId: 5006,
@@ -34,6 +86,31 @@ const peddingApprovals = [
     RegistrationNumber: "KA-01-GH-1121",
     TechnicianName: "Bob Brown",
     TestDate: "2025-01-18",
+    Owner: "Kiran",
+    Tests: {
+      rule189_1a: { item: "Service Brake Performance", type: "Automated", status: "Passed" },
+      rule189_1b: { item: "Parking Brake Performance", type: "Automated", status: "Passed" },
+      rule189_2: { item: "Headlight Beam Alignment", type: "Automated", status: "Passed" },
+      rule189_3a: { item: "Side Slip Test - Left", type: "Automated", status: "Passed" },
+      rule189_3b: { item: "Side Slip Test - Right", type: "Automated", status: "Passed" },
+      rule189_3c: { item: "Suspension Test - Front Left", type: "Automated", status: "Passed" },
+      rule189_3d: { item: "Suspension Test - Front Right", type: "Automated", status: "Passed" },
+      rule189_3e: { item: "Suspension Test - Rear Left", type: "Automated", status: "Passed" },
+      rule189_3f: { item: "Suspension Test - Rear Right", type: "Automated", status: "Passed" },
+      rule189_3g: { item: "Wheel Alignment Check", type: "Automated", status: "Passed" },
+      rule189_3h: { item: "Wheel Balance Check", type: "Automated", status: "Passed" },
+      rule189_3i: { item: "Tyre Condition Check", type: "Visual", status: "Passed" },
+      rule189_4: { item: "Speedometer Calibration", type: "Automated", status: "Passed" },
+      rule189_5: { item: "Sound Level Test", type: "Automated", status: "Passed" },
+      rule189_6: { item: "Emission Test - Opacity / Gas Analyzer", type: "Automated", status: "Passed" },
+      rule189_7: { item: "Exhaust Leak Test", type: "Automated", status: "Passed" },
+      rule189_7_Visual: { item: "Exhaust System Check", type: "Visual", status: "Passed" },
+      rule189_8a: { item: "Underbody Inspection - Structural Integrity", type: "Visual", status: "Passed" },
+      rule189_8b: { item: "Underbody Inspection - Rust / Damage", type: "Visual", status: "Passed" },
+      // ... all remaining entries with status: "Passed"
+      // Example:
+      imgChassis: { item: "Photo: Chassis", type: "Visual Proof", status: "Passed" }
+    },
   },
   {
     BookingId: 5007,
@@ -43,6 +120,31 @@ const peddingApprovals = [
     RegistrationNumber: "KA-01-IJ-3141",
     TechnicianName: "Charlie Davis",
     TestDate: "2025-01-19",
+    Owner: "Helo",
+    Tests: {
+      rule189_1a: { item: "Service Brake Performance", type: "Automated", status: "Passed" },
+      rule189_1b: { item: "Parking Brake Performance", type: "Automated", status: "Passed" },
+      rule189_2: { item: "Headlight Beam Alignment", type: "Automated", status: "Passed" },
+      rule189_3a: { item: "Side Slip Test - Left", type: "Automated", status: "Passed" },
+      rule189_3b: { item: "Side Slip Test - Right", type: "Automated", status: "Passed" },
+      rule189_3c: { item: "Suspension Test - Front Left", type: "Automated", status: "Passed" },
+      rule189_3d: { item: "Suspension Test - Front Right", type: "Automated", status: "Passed" },
+      rule189_3e: { item: "Suspension Test - Rear Left", type: "Automated", status: "Passed" },
+      rule189_3f: { item: "Suspension Test - Rear Right", type: "Automated", status: "Passed" },
+      rule189_3g: { item: "Wheel Alignment Check", type: "Automated", status: "Passed" },
+      rule189_3h: { item: "Wheel Balance Check", type: "Automated", status: "Passed" },
+      rule189_3i: { item: "Tyre Condition Check", type: "Visual", status: "Passed" },
+      rule189_4: { item: "Speedometer Calibration", type: "Automated", status: "Passed" },
+      rule189_5: { item: "Sound Level Test", type: "Automated", status: "Passed" },
+      rule189_6: { item: "Emission Test - Opacity / Gas Analyzer", type: "Automated", status: "Passed" },
+      rule189_7: { item: "Exhaust Leak Test", type: "Automated", status: "Passed" },
+      rule189_7_Visual: { item: "Exhaust System Check", type: "Visual", status: "Passed" },
+      rule189_8a: { item: "Underbody Inspection - Structural Integrity", type: "Visual", status: "Passed" },
+      rule189_8b: { item: "Underbody Inspection - Rust / Damage", type: "Visual", status: "Passed" },
+      // ... all remaining entries with status: "Passed"
+      // Example:
+      imgChassis: { item: "Photo: Chassis", type: "Visual Proof", status: "Passed" }
+    },
   },
 ];
 
@@ -351,4 +453,4 @@ const vehicleData = [
   })),
 ];
 
-export { peddingApprovals, vehicleData };
+export { pendingApprovals, vehicleData };
