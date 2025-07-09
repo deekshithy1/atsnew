@@ -6,12 +6,13 @@ export const useAuthStore = create(
     (set) => ({
       isLogin: false,
       user: null,
-
+     token:null,
      
-      login: (user) =>
+      login: (user,token) =>
         set(() => ({
           isLogin: true,
           user: user,
+          token:token,
         })),
 
      
@@ -19,6 +20,7 @@ export const useAuthStore = create(
         set(() => ({
           isLogin: false,
           user: null,
+          token:null,
         })),
 
      

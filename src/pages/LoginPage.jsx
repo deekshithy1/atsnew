@@ -2,11 +2,13 @@ import React, { useState } from 'react';
 import pattern from '../assets/Pattern 01.png';
 import { useAuthStore, vehicleStore } from '../store/store';
 import { useNavigate } from 'react-router-dom';
+import { Login } from '../api';
 
 const LoginPage = () => {
-  const [formData, setFormData] = useState({ username: '', password: '' });
+  const [formData, setFormData] = useState({ email: '', password: '' });
   const login = useAuthStore((state) => state.login);
   const navigate = useNavigate();
+  const user=useAuthStore((state)=>state.login)
 
   const MOCK_USER = {
     username: "admin",
@@ -28,41 +30,28 @@ const LoginPage = () => {
       [e.target.name]: e.target.value 
     });
   };
-
-    const handleSubmit = (e) => {
-      e.preventDefault();
-    
-      if (
-        formData.username === MOCK_USER.username &&
-        formData.password === MOCK_USER.password
-      ) {
-        login({
-          username: MOCK_USER.username,
-          name: MOCK_USER.name,
-          role: MOCK_USER.role,
-        });
-    
-        console.log("✅ Mock login success:", MOCK_USER);
-        navigate("/");
-      } 
-      else if (
-        formData.username === MOCK_USER2.username &&
-        formData.password === MOCK_USER2.password
-      ) {
-        login({
-          username: MOCK_USER2.username,
-          name: MOCK_USER2.name,
-          role: MOCK_USER2.role,
-        });
-    
-        console.log("✅ Mock login success:", MOCK_USER2);
-        navigate("/");
-      } 
-      else {
-        alert("❌ Invalid username or password!");
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+  
+  
+    try {
+      const authData = {
+        email:formData.email,
+        password:formData.password
+      };
+  
+      const res = await Login(authData);
+      if (res) {
+        navigate("/")
+        const { token, user } = res.data; // Use res.data!
+        console.log(res.data.token)
+      login({token,user})
       }
-    };
-    
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  
 
 
   return (
@@ -92,9 +81,9 @@ const LoginPage = () => {
               </label>
               <input
                 type="text"
-                name="username"
+                name="email"
                 id="username"
-                value={formData.username}
+                value={formData.email}
                 onChange={handleChange}
                 placeholder="Enter your username"
                 className="border border-gray-300 w-full px-4 py-3 rounded focus:outline-none focus:ring-2 focus:ring-blue-500 font-semibold text-[16px] text-[#082777]"
