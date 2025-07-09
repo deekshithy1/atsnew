@@ -7,6 +7,8 @@ import {
   Play,
   RotateCcw,
 } from "lucide-react";
+import { useNavigate } from "react-router-dom";
+import { Fetchvehicles } from "../api";
 
 const statusColor = {
   Pending: "bg-yellow-100 text-yellow-700",
@@ -23,11 +25,22 @@ const Vehicles = () => {
   const [filtered, setFiltered] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
-
+  const navigate=useNavigate();
   useEffect(() => {
-    setVehicles(vehicleData);
-    setFiltered(vehicleData);
+    const fetchData = async () => {
+      const vehicles = await Fetchvehicles();
+      console.log(vehicles.data)
+      setVehicles(vehicles.data);
+      setFiltered(vehicles);
+    };
+  
+    fetchData();
   }, []);
+  
+  const handleClick=()=>{
+     navigate("/addvehicle")
+
+  }
 
   useEffect(() => {
     const filteredList = vehicles.filter((v) =>
@@ -65,7 +78,7 @@ const Vehicles = () => {
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
           />
-          <button className="bg-blue-600 text-white px-5 py-2 rounded-md text-sm font-medium hover:bg-blue-700">
+          <button className="bg-blue-600 text-white px-5 py-2 rounded-md text-sm font-medium hover:bg-blue-700" onClick={handleClick}>
             + Add Vehicle
           </button>
         </div>

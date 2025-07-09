@@ -10,6 +10,7 @@ import Users from './pages/Users'
 import Settings from './pages/Settings'
 import LoginPage from './pages/LoginPage'
 import ProtectedRoutes from './components/ProtectedRoutes'
+import AddVehicle from './pages/AddVehicle'
 
 function App() {
   return (
@@ -25,6 +26,7 @@ function App() {
             <Route path="approvals" element={<Approvals />} />
             <Route path="users" element={<Users />} />
             <Route path="settings" element={<Settings />} />
+            <Route path='addvehicle' element={<AddVehicle/>}/>
           </Route>
         </Route>
         <Route path='/login' element={<LoginPage/>}/>
